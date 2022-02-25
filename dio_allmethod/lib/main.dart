@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
+import '/service/http_service.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-
-import 'model/all_specialisation.dart';
+import 'model/allspecialisation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,14 +9,13 @@ void main() {
 
 //https://levelup.gitconnected.com/the-best-way-to-handle-network-requests-in-flutter-874a606c07b6
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -37,21 +34,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AllSpecialisation? allSpecialisation;
+  HttpService httpService = HttpService();
   bool apiHit = false;
+  @override
+  void initState() {
+    httpService.init();
+    fetchProducts();
+    super.initState();
+  }
 
-  Future<AllSpecialisation> getHttp() async {
-    try {
-      var response = await Dio()
-          .get('https://eduarno1.herokuapp.com/get_specialisations/');
+  void fetchProducts() async {
+    final result = await httpService.request(
+        url: "get_specialisations", method: Method.GET);
+    if (result != null) {
       allSpecialisation =
-          AllSpecialisation.fromJson(json.decode(response.toString()));
+          AllSpecialisation.fromJson(json.decode(result.toString()));
       debugPrint(allSpecialisation!.data![1].specialisation);
-      setState(() {
+       setState(() {
         apiHit = true;
       });
-      return allSpecialisation!;
-    } catch (e) {
-      throw Exception('Something bad happened.');
     }
   }
 
@@ -60,14 +61,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            Center(
-                child: ElevatedButton(
-              onPressed: () {
-                getHttp();
-              },
-              child: Text("Get data"),
-            )),
+          children: [            
             const SizedBox(height: 20),
             apiHit
                 ? ListView.builder(
