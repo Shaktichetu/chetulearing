@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       allSpecialisation =
           AllSpecialisation.fromJson(json.decode(response.toString()));
       debugPrint(allSpecialisation!.data![1].specialisation);
-      setState(() {});
+      //setState(() {});
       return allSpecialisation!;
     } catch (e) {
       throw Exception('Something bad happened.');
@@ -59,13 +59,13 @@ class _HomePageState extends State<HomePage> {
             Center(
                 child: ElevatedButton(
               onPressed: () {
-                futurSpecial = getHttp();
+              getHttp();
               },
-              child: Text("Get data"),
+              child:const Text("Get data"),
             )),
             const SizedBox(height: 20),
             FutureBuilder<AllSpecialisation>(
-              future: futurSpecial,
+              future: getHttp(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
@@ -92,10 +92,11 @@ class _HomePageState extends State<HomePage> {
                   );
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.error}');
-                }else if(snapshot.connectionState == ConnectionState.waiting){
-                  return const CircularProgressIndicator(color: Colors.red);
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const CircularProgressIndicator(color: Colors.greenAccent);
                 }
-                return const Text('please wait');
+                return const Text('wating');
               },
             )
           ],

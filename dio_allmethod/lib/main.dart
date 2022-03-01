@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:dio_allmethod/model/SpecialisationModel.dart';
+
 import '/service/http_service.dart';
 import 'package:flutter/material.dart';
 import 'model/allspecialisation.dart';
@@ -34,6 +36,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   AllSpecialisation? allSpecialisation;
+  SpecialisationModel? specialisationModel;
   HttpService httpService = HttpService();
   bool apiHit = false;
   @override
@@ -47,10 +50,10 @@ class _HomePageState extends State<HomePage> {
     final result = await httpService.request(
         url: "get_specialisations", method: Method.GET);
     if (result != null) {
-      allSpecialisation =
-          AllSpecialisation.fromJson(json.decode(result.toString()));
-      debugPrint(allSpecialisation!.data![1].specialisation);
-       setState(() {
+      specialisationModel =
+          SpecialisationModel.fromJson(json.decode(result.toString()));
+      debugPrint(specialisationModel!.data![1].specialisation);
+      setState(() {
         apiHit = true;
       });
     }
@@ -61,14 +64,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: [            
+          children: [
             const SizedBox(height: 20),
             apiHit
                 ? ListView.builder(
                     physics: ClampingScrollPhysics(),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: allSpecialisation!.data!.length,
+                    itemCount: specialisationModel!.data!.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                           margin: const EdgeInsets.only(left: 8, bottom: 8),
@@ -80,13 +83,13 @@ class _HomePageState extends State<HomePage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5))),
                           child: Text(
-                              allSpecialisation!.data![index].specialisation!,
+                              specialisationModel!.data![index].specialisation!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 14)));
                     },
                   )
-                : const Text("fetching data")
+                : const Center(child: Text("fetching data"))
           ],
         ),
       ),
