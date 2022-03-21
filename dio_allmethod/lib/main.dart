@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:dio_allmethod/model/SpecialisationModel.dart';
-
 import '/service/http_service.dart';
 import 'package:flutter/material.dart';
 import 'model/allspecialisation.dart';
