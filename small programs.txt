@@ -91,3 +91,90 @@ class MyApp extends StatelessWidget {
     ); //MaterialApp
   }
 }
+
+2. Text Demo
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Text Field Focus',
+      home: MyCustomForm(),
+    );
+  }
+}
+
+// Define a custom Form widget.
+class MyCustomForm extends StatefulWidget {
+  const MyCustomForm({Key? key}) : super(key: key);
+
+  @override
+  _MyCustomFormState createState() => _MyCustomFormState();
+}
+
+// Define a corresponding State class.
+// This class holds data related to the form.
+class _MyCustomFormState extends State<MyCustomForm> {
+  // Define the focus node. To manage the lifecycle, create the FocusNode in
+  // the initState method, and clean it up in the dispose method.
+  late FocusNode myFocusNode;
+  // Initialise outside the build method
+  FocusNode nodeOne = FocusNode();
+  FocusNode nodeTwo = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Do this inside the build method
+              TextField(
+                focusNode: nodeOne,
+                textCapitalization: TextCapitalization.characters,
+                textAlign: TextAlign.center,
+                cursorColor: Colors.red,
+                cursorRadius: Radius.circular(16.0),
+                cursorWidth: 16.0,
+                maxLines: null,
+                onEditingComplete: () =>
+                    FocusScope.of(context).requestFocus(nodeTwo),
+              ),
+              TextField(
+                focusNode: nodeTwo,
+                decoration: const InputDecoration(helperText: "Hello"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  FocusScope.of(context).requestFocus(nodeTwo);
+                },
+                child: Text("Next Field"),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
