@@ -178,3 +178,150 @@ class _MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
+
+
+3. Form validation 
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Text Field Focus',
+      home: TextSubmitWidget(),
+    );
+  }
+}
+
+class TextSubmitWidget extends StatefulWidget {
+  const TextSubmitWidget({
+    Key? key,
+  }) : super(key: key);
+  // final ValueChanged<String> onSubmit;
+
+  @override
+  State<TextSubmitWidget> createState() => _TextSubmitWidgetState();
+}
+
+class _TextSubmitWidgetState extends State<TextSubmitWidget> {
+  final _formKey = GlobalKey<FormState>();
+  // declare a variable to keep track of the input text
+  String _name = '';
+
+  void _submit() {
+    // validate all the form fields
+    if (_formKey.currentState!.validate()) {
+      // on success, notify the parent widget
+      // widget.onSubmit(_name);
+      print("object");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // build a Form widget using the _formKey created above.
+    return Scaffold(
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              decoration: const InputDecoration(
+                labelText: 'Enter your name',
+              ),
+              // use the validator to return an error string (or null) based on the input text
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Can\'t be empty';
+                }
+                if (text.length < 4) {
+                  return 'Too short';
+                }
+                return null;
+              },
+              // update the state variable when the text changes
+              onChanged: (text) => setState(() => _name = text),
+            ),
+            const SizedBox(height: 50),
+            ElevatedButton(
+              // only enable the button if the text is not empty
+              onPressed: _name.isNotEmpty ? _submit : null,
+              child: Text(
+                'Submit',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+4.Gridview expand n colapse code 
+
+class MyApp extends StatelessWidget {
+ 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Flutter GridView Demo"),
+          backgroundColor: Colors.red,
+        ),
+        body: Container(
+          padding: EdgeInsets.all(12.0),
+          child: GridView(
+              shrinkWrap: true,
+              children: List.generate(
+                  7,
+                  (index) => Container(
+                      padding: const EdgeInsets.all(10),
+                      color: Colors.blueAccent,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Icon(Icons.settings, color: Colors.white),
+                              Text('Operation',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal))
+                            ],
+                          ),
+                          const Expanded(
+                            child: Text('00',
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                    fontSize: 24, color: Colors.white)),
+                          )
+                        ],
+                      ))),
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  childAspectRatio: 3 / 2,
+                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 5.0,
+                  mainAxisExtent: 80,
+                  maxCrossAxisExtent: 300)),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
