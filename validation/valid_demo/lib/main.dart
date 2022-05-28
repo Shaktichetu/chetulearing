@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:valid_demo/mixins/valiation_mixin.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -43,11 +44,13 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
           padding: const EdgeInsets.all(20.0),
           child: Form(
               key: formKey,
+              
               child: Column(
                 children: [
                   SizedBox(
                     // height: 50,
                     child: TextFormField(
+                      
                       textAlignVertical: TextAlignVertical.center,
                       controller: _nameController,
                       key: _nameKey,
@@ -64,6 +67,7 @@ class _HomePageState extends State<HomePage> with ValidationMixin {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                       ),
+                      
                       validator: (String? name) {
                         if (validateName(name!)) {
                           return null;
