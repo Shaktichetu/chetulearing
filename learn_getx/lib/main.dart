@@ -4,8 +4,11 @@ import 'package:learn_getx/cart.dart';
 import 'package:learn_getx/controller.dart';
 import 'package:learn_getx/homebinding.dart';
 import 'package:learn_getx/shop.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+
+void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Flutter Demo',
-     // initialBinding: HomeBinding(),
+      // initialBinding: HomeBinding(),
       getPages: [
         GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding())
       ],
@@ -32,8 +35,8 @@ class MyApp extends StatelessWidget {
 class HomePage extends GetWidget<HomeController> {
   //HomePage({Key? key}) : super(key: key);
   //HomeController homeController = Get.put(HomeController(), permanent: true);
- // HomeController homeController = Get.find<HomeController>();
-
+  // HomeController homeController = Get.find<HomeController>();
+  final storage = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
