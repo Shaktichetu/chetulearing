@@ -29,9 +29,6 @@ class SignupController extends GetxController {
 
   @override
   void onInit() {
-    // usernameController.clear();
-    // emailController.clear();
-    // passwordController.clear();
     super.onInit();
   }
 
@@ -90,39 +87,11 @@ class SignupController extends GetxController {
   }
 
   void signupPersonal() {
-    // var user = usernameController;
-    // var email = emailController.text;
-    // var password = passwordController.text;
-
-    if (isFormValid()) {
-    //  Get.to(() => PersonalSignup(), arguments: [user, email, password]);
-    }
     
-    // usernameController.text = "";
-    // emailController.text = "";
-    // passwordController.text = "";
+    if (isFormValid()) {
+    
+    } 
   }
 
-// void signupClear() {
 
-//   }
-
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    usernameController.clear();
-    emailController.clear();
-    passwordController.clear();
-    super.onClose();
-  }
-
-  // void dispose() {
-  //   super.dispose();
-  //   // usernameController.text = "";
-  //   // emailController.text = "";
-  //   // passwordController.text = "";
-  //   usernameController.close();
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  // }
 }

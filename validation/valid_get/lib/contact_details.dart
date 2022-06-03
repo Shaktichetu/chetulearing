@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:valid_get/strings.dart';
@@ -659,7 +658,7 @@ class _ContactDetailsState extends State<ContactDetails> {
                                 onPressed: () {
                                   if (contactDetailsController
                                       .phoneNumberFormKey.currentState!
-                                      .validate()) {
+                                      .validate() ) {
                                     if (contactDetailsController
                                         .addressLine1FormKey.currentState!
                                         .validate()) {

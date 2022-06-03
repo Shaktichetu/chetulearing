@@ -11,9 +11,9 @@ class Cart extends StatelessWidget {
         Text(Get.arguments),
         ElevatedButton(
             onPressed: () {
-              Get.back(result: "success");
+              Get.back(result: "success back");
             },
-            child: Text("Going back"))
+            child:const Text("Going back"))
       ]),
     );
   }

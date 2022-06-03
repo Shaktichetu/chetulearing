@@ -12,6 +12,7 @@ void main() async {
   runApp(const MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,7 +22,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       // initialBinding: HomeBinding(),
       getPages: [
-        GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding())
+        GetPage(name: '/home', page: () => HomePage(), binding: HomeBinding()),
+        GetPage(name: '/cart', page: () => Cart()),
+        GetPage(name: '/shop/:productVariable', page: () => Shop()),
       ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -33,9 +36,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends GetWidget<HomeController> {
-  //HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
   //HomeController homeController = Get.put(HomeController(), permanent: true);
-  // HomeController homeController = Get.find<HomeController>();
+  // // HomeController homeController = Get.find<HomeController>();
   final storage = GetStorage();
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,6 @@ class HomePage extends GetWidget<HomeController> {
                 print("followers widget rebuilds");
                 return Text("user followers: ${controller.followers}");
               }),
-
           GetX<HomeController>(builder: (_) {
             print("status widget rebiulds");
             return Text("user Status: ${controller.status}");
@@ -60,15 +62,18 @@ class HomePage extends GetWidget<HomeController> {
           }),
           ElevatedButton(
               onPressed: () {
-                Get.to(Shop());
+              //  Get.toNamed('/shop/Macbook');
+                //  Get.to(Shop());
                 controller.updateStatus("offline");
               },
-              child: Text("Logout"))
-          // ElevatedButton(
-          //     onPressed: () {
-          //       Get.to(Cart(), arguments: "Hello flutter");
-          //     },
-          //     child: Text("Navigate"))
+              child:const Text("Logout")),
+              ElevatedButton(
+              onPressed: () async {
+                var data =
+                    await Get.toNamed('/cart', arguments: "Hello flutter" );
+                debugPrint(data);
+              },
+              child:const Text("Navigate"))
         ],
       ),
     );
