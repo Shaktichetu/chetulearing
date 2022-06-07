@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class HomePage extends GetWidget<HomeController> {
   HomePage({Key? key}) : super(key: key);
   //HomeController homeController = Get.put(HomeController(), permanent: true);
