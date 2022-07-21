@@ -1,0 +1,46 @@
+import 'package:get/get.dart';
+
+class AddNewFriendsController extends GetxController {
+  List<String> tempFriendsList = [];
+  List<String> listFriends = [
+    'Alex',
+    "Mumbai",
+    'Bob',
+    'Martin',
+    'Zebra',
+    'Yak',
+    'Dtruh',
+    'Amioe',
+    'Elephant',
+    'Neil',
+    'Lion',
+    'Aman',
+    "Mumbai and",
+    'Shakti',
+    'Mishra',
+    'Chetu',
+    "Mumbai"
+  ];
+
+  @override
+  void onInit() {
+    tempFriendsList.addAll(listFriends);
+    super.onInit();
+  }
+
+  void searchFrinedsList(String name) {
+    tempFriendsList.clear();
+    if (name.isEmpty) {
+      tempFriendsList.addAll(listFriends);
+    } else {
+      for (var item in listFriends) {
+        if (item.toLowerCase().startsWith(name.toLowerCase())) {
+          listFriends.indexOf(item);
+          tempFriendsList.add(item);
+        }
+      }
+    }
+    tempFriendsList.sort((a, b) => a.compareTo(b));
+    update();
+  }
+}
