@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jonathan/controllers/add_new_friends_controller.dart';
+import '../../common/values/app_images.dart';
+import '../../common/values/appcolors.dart';
+import '../../common/values/dimensions.dart';
+
+class AddNewFriendsTab extends StatelessWidget {
+  const AddNewFriendsTab({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(AddNewFriendsController());
+    return GetBuilder<AddNewFriendsController>(
+      init: controller,
+      builder: (context) {
+        return Column(
+          children: [
+            TextFormField(
+              textInputAction: TextInputAction.search,
+              onChanged: (value) => controller.searchFrinedsList(value),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: "Search People",
+                filled: true,
+                fillColor: AppColors.grey,
+                prefixIcon: Icon(Icons.search)),
+            ),
+            Expanded(
+              child: GetBuilder<AddNewFriendsController>(
+                init: controller,
+                builder: (context) {
+                  return ListView.builder(
+                      itemCount: controller.tempFriendsList.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        var data = controller.tempFriendsList[index];
+                        return ListTile(
+                          leading: ClipOval(
+                            child: Image.asset(
+                              AppImages.cricket,
+                              fit: BoxFit.cover,
+                              width: 45,
+                              height: 45,
+                            ),
+                          ),
+                          title: Text(
+                            data,
+                            style: const TextStyle(
+                                fontSize: FontSize.normal, fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text(
+                            data,
+                            style: const TextStyle(
+                              fontSize: FontSize.normal,
+                            ),
+                          ),
+                          trailing: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              )),
+                              backgroundColor:
+                                  MaterialStateProperty.all(AppColors.dashboardGreen),
+                            ),
+                            child: Text(
+                              "Add",
+                              style: TextStyle(color: AppColors.white),
+                            ),
+                            onPressed: null,
+                          ),
+                        );
+                      });
+                }
+              ),
+            )
+          ],
+        );
+      }
+    );
+  }
+}
