@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 // this class is used for catch the dio error and show msg
 class DioErrorUtil {
@@ -35,5 +34,4 @@ class DioErrorUtil {
     }
     return errorDescription;
   }
-
 }
