@@ -1,0 +1,628 @@
+	Sorting is stable if it maintains relative order of duplicate elements.
+	Sorting is In-place if space complexity is O(1) , it doesn't require any extra space.
+	
+
+1.	/**Selection Sort**/
+        /**This is unstable sort,UnAdaptive  n time complexity os O(N)square**/
+    public static void main(String[] args) {
+        	int arr[]= {4, 5, 6, 2, 1, 7, 10, 3, 8, 9};
+        	for (int i =0;i<arr.length;i++){
+        	    for (int j=i+1;j<arr.length;j++){
+        	        if (arr[i]>arr[j]){
+        	            int temp = arr[i];
+        	            arr[i] = arr[j];
+        	            arr[j]=temp;
+                    }
+                }
+            }
+        /**Printing the array**/
+        for (int i=0;i<arr.length;i++)
+            System.out.print(arr[i]+" ");
+       //System.out.print(Arrays.toString(arr));
+    }
+
+2. /**Bubble Sort**/
+    /** Each element is compared with neighbour and swapped if required
+     * It is stable n Adaptive sort. Run time complexity O(N)square n space complexity O(1)
+     * **/
+    public static void main(String[] args) {
+        int arr[]= {4, 5, 6, 2, 1, 7, 10, 3, 8, 9};
+        for (int i =0;i<arr.length;i++){
+                boolean swapped = false;
+            for (int j=0;j<arr.length-1-i;j++){
+                if (arr[j]>arr[j+1]){
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1]=temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+        }
+
+        /**Printing the array**/
+        for (int i=0;i<arr.length;i++)
+            System.out.print(arr[i]+" ");
+    }
+
+3. /**Insertion Sort**/
+    /***This is in-place means space complexity O(1) , doese't require to make copy of array.
+     * This is stable sort,Adaptive n time complexity is O(N)square**/
+    
+    public static void main(String[] args) {
+        int arr[]= {4, 5, 6, 2, 1, 7, 10, 3, 8, 9};
+        for (int i =0;i<arr.length-1;i++){  /**Go upto second last element**/
+            for (int j=i+1;j>0;j--){
+                if (arr[j-1]>arr[j]){
+                    int temp = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j]=temp;
+                }
+            }
+        }
+
+        /**Printing the array**/
+        for (int i=0;i<arr.length;i++)
+            System.out.print(arr[i]+" ");
+    }
+
+4. Merge Sort is not In-Place , run time complexiy is O(nLogn)base 2, this spable sort means relative ordering of 		   dublicate items is preserved.
+
+#include<stdio.h>
+#include<conio.h>
+#define MAX 100
+
+void mergesort(int a[],int low,int up);
+void merge(int a[],int temp[],int low1,int up1,int low2,int up2);
+void copy(int a[],int temp[],int low,int up);
+
+
+int main()
+{
+    int a[MAX],n,i;
+    
+    printf("Enter the no of elements in  array: ");
+    scanf("%d",&n);
+    printf("Enter elements in order: \n");
+    for(i=0;i<n;i++)
+    {
+       printf("Enter the element %d :",i+1);
+       scanf("%d",&a[i]);
+    }
+
+    mergesort(a,0,n-1);
+    printf("Sorted list  is: \n");
+    for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+     printf("\n");
+
+getch();
+}
+
+void mergesort(int a[],int low,int up)
+{
+    int mid;
+    int temp[MAX];
+
+    if(low==up) // stop if having only one element.
+	return;
+    mid=(low+up)/2;
+
+    mergesort(a,low,mid); //sort a[low] to a mid.
+    mergesort(a,mid+1,up);//sort a[mid+1] to up.
+
+    /* Merge a[low]...a[mid],and a[mid+1]....a[up],to temp[low]...temp[up2] */
+    merge(a,temp,low,mid,mid+1,up);
+
+    /*Copy temp[low]....temp[up],to a[low] and a[up] */
+    copy(a,temp,low,up);
+}
+
+/* a[low1]...a[up1], and a[low2]...a[up2],merged to temp[low1]...temp[up2]*/
+/*  If single array has two sorted parts. */
+void merge(int a[],int temp[],int low1,int up1,int low2,int up2)
+{
+    int i= low1;
+    int j= low2;
+    int k= low1;
+
+    while((i<=up1)&&(j<=up2))
+    {
+	if(a[i]<a[j])
+	    temp[k++]=a[i++];
+	else
+	    temp[k++]=a[j++];
+    }
+    //Coping remaning elements of a1,if a2 is finished.
+    while(i<=up1)
+	temp[k++]=a[i++];
+    //Coping remaining elements of a2,if a1 is finished.
+    while(j<=up2)
+	temp[k++]=a[j++];
+}
+
+void copy(int a[],int temp[],int low,int up)
+{
+    int i;
+    for(i=low;i<=up;i++)
+	a[i]=temp[i];
+}
+
+5. Merge sort in java
+
+	public static void main(String[] args) {
+        int[] intArray = { 20, 35, -15, 7, 55, 1, -22 };
+
+        mergeSort(intArray, 0, intArray.length);
+
+        for (int i = 0; i < intArray.length; i++) {
+            System.out.println(intArray[i]);
+        }
+    }
+
+    // { 20, 35, -15, 7, 55, 1, -22 }
+    public static void mergeSort(int[] input, int start, int end) {
+
+        if (end - start < 2) {
+            return;
+        }
+
+        int mid = (start + end) / 2;
+        mergeSort(input, start, mid);
+        mergeSort(input, mid, end);
+        merge(input, start, mid, end);
+    }
+
+    // { 20, 35, -15, 7, 55, 1, -22 }
+    public static void merge(int[] input, int start, int mid, int end) {
+
+        if (input[mid - 1] <= input[mid]) {
+            return;
+        }
+
+        int i = start;
+        int j = mid;
+        int tempIndex = 0;
+
+        int[] temp = new int[end - start];
+        while (i < mid && j < end) {
+            temp[tempIndex++] = input[i] <= input[j] ? input[i++] : input[j++];
+        }
+
+            /**Copy remaining element of left array to input array**/
+        System.arraycopy(input, i, input, start + tempIndex, mid - i);
+            /**Don't need to copy element of right array  from input to temp and again to input. So simply copy left 		array**/
+        System.arraycopy(temp, 0, input, start, tempIndex);
+    }
+
+6. Merge Sort in java with jenny
+
+public class MergeSortJ {
+
+    private static int listToSort[] = new int[] {3, 5, 6, 8, 10, 1, 2, 4, 7, 9};
+    public static void main(String[] args) {
+        print(listToSort);
+        mergeSort(listToSort);
+    }
+
+    public static void print(int[] listToSort) {
+        for (int el : listToSort) {
+            System.out.print(el + ",");
+        }
+        System.out.println();
+    }
+
+    public static void mergeSort(int[] listToSort) {
+        if (listToSort.length == 1) {
+            return;
+        }
+
+        int midIndex = listToSort.length / 2 + listToSort.length % 2;
+        int[] listFirstHalf = new int[midIndex];
+        int[] listSecondHalf = new int[listToSort.length - midIndex];
+        split(listToSort, listFirstHalf, listSecondHalf);
+
+        mergeSort(listFirstHalf);
+        mergeSort(listSecondHalf);
+
+        merge(listToSort, listFirstHalf, listSecondHalf);
+        print(listToSort);
+    }
+
+    public static void split(int[] listToSort, int[] listFirstHalf, int[] listSecondHalf) {
+        int index = 0;
+        int secondHalfStartIndex = listFirstHalf.length;
+        for (int elements : listToSort) {
+            if (index < secondHalfStartIndex) {
+                listFirstHalf[index] = listToSort[index];
+            } else {
+                listSecondHalf[index - secondHalfStartIndex] = listToSort[index];
+            }
+            index++;
+        }
+    }
+
+    public static void merge(int[] listToSort, int[] listFirstHalf, int[] listSecondHalf) {
+        int mergeIndex = 0;
+        int firstHalfIndex = 0;
+        int secondHalfIndex = 0;
+
+        while (firstHalfIndex < listFirstHalf.length && secondHalfIndex < listSecondHalf.length) {
+            if (listFirstHalf[firstHalfIndex] < listSecondHalf[secondHalfIndex]) {
+                listToSort[mergeIndex] = listFirstHalf[firstHalfIndex];
+                firstHalfIndex++;
+            } else if (secondHalfIndex < listSecondHalf.length) {
+                listToSort[mergeIndex] = listSecondHalf[secondHalfIndex];
+                secondHalfIndex++;
+            }
+            mergeIndex++;
+        }
+
+        if (firstHalfIndex < listFirstHalf.length) {
+            while (mergeIndex < listToSort.length) {
+                listToSort[mergeIndex++] = listFirstHalf[firstHalfIndex++];
+            }
+        }
+        if (secondHalfIndex < listSecondHalf.length) {
+            while (mergeIndex < listToSort.length) {
+                listToSort[mergeIndex++] = listSecondHalf[secondHalfIndex++];
+            }
+        }
+    }
+}
+
+7. Quick Sort:-In-Place Algorithm,Run time complexity O(nLogn)base 2. It is unstable sort.
+
+#include<stdio.h>
+#include<conio.h>
+#define MAX 100
+
+void quicksort(int a[],int low,int up);
+int  partition(int a[],int low,int up);
+
+
+
+void main()
+{
+    int a[MAX],n,i;
+
+    printf("Enter the no of elements in  array: ");
+    scanf("%d",&n);
+
+    for(i=0;i<n;i++)
+    {
+       printf("Enter the element %d :",i+1);
+       scanf("%d",&a[i]);
+    }
+
+    quicksort(a,0,n-1);
+    printf("Sorted list  is: \n");
+    for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+     printf("\n");
+
+getch();
+}
+
+void quicksort(int a[],int low,int up)
+{
+    int p; /**Index of pivot**/
+    if(low>=up)  /**Zero or one elelment in the sublist**/
+	return;
+    p = partition(a,low,up);
+    quicksort(a,low,p-1); /**Sort left sublist***/
+    quicksort(a,p+1,up); /**Sort right sublist**/
+}
+
+int partition(int a[],int low,int up)
+{
+    int temp,i,j,pivot;
+
+    pivot=a[low];
+
+    i=low+1;   // Moves from left to right.
+    j=up;      // Moves from right to left.
+
+    while(i<=j)
+    {
+	while(a[i]< pivot && i<up)
+	    i++;
+	while(a[j]>pivot)
+	    j--;
+	if(i<j) /**Swap a[i] and a[j]**/
+	{
+	    temp=a[i];
+	    a[i]=a[j];
+	    a[j]=temp;
+	    i++;
+	    j--;
+	}
+	else
+	      break;   //Found proper place for pivot.
+    }
+    //Proper place for pivot is j.
+    a[low]=a[j];
+    a[j]=pivot;
+    return j; 
+}
+
+
+final 450
+
+1. /**Given three distinct numbers A, B and C. Find the number with value in middle (Try to do it with minimum comparisons).**/
+    public static void main(String[] args) {
+        int a = 20, b = 30, c = 40;
+        
+        if((a>b && a<c)||(a>c && a<b))
+            System.out.println(a);
+        else if((b>a && b<c)||(b>c && b<a))
+            System.out.println(b);
+        else System.out.println(c);;
+    }
+    
+ 2. /**Find first and last index of target element in sorted array**/
+    public static void main(String[] args) {
+        int arr[] = {1, 3, 5, 5, 5, 5, 67, 123, 125};
+        int x = 5;
+        int first = -1, last = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == x) {
+                last = i;
+                if (first == -1)
+                    first = i;
+            }
+        }
+        System.out.println("first: " + first + ",last: " + last);
+    }
+    
+       
+    3. /**Given an array Arr of N positive integers.
+     * Your task is to find the elements whose value is equal to that of its index value.*/
+      
+      public static void main(String[] args) {
+      int  arr[] = {15, 2, 45, 4,12, 7};
+        ArrayList<Integer> val = new ArrayList<>();
+        for (int i=0;i< arr.length;i++){
+            if (arr[i]==i+1)
+                val.add(arr[i]);
+        }
+        System.out.println(val);
+    }
+    
+4.  /**Find four elements that sum to a given value*/
+    public static void main(String[] args) {
+        int arr[] = { 1, 2, -3, 4, -2, -1, 3 };
+        int n = arr.length;
+        int targetSum = 3;
+        int start, end;
+        Arrays.sort(arr);
+
+        for (int i = 0; i < n - 3; i++)
+        {
+            for (int j = i + 1; j < n - 2; j++)
+            {
+                start = j + 1;
+                end = n - 1;
+                while (start < end)
+                {
+                    if (arr[i] + arr[j] + arr[start] + arr[end] == targetSum)
+                    {
+                        System.out.println(arr[i]+" "+arr[j]+" "+arr[start]+" "+arr[end]);
+                        start++;
+                        end--;
+                    }
+                    else if (arr[i] + arr[j] + arr[start] + arr[end] < targetSum)
+                        start++;
+                    else
+                        end--;
+                }
+            }
+        }
+    }
+    
+5. /**Find Triplets with sum smaller than Target Sum*/
+     public static void main(String[] args) {
+         int arr[] = { 1, 2, -3, 4, -2};
+         int targetSum =1;
+         Arrays.sort(arr);
+         int tripletCount = 0;
+         
+         for(int i = 0; i < arr.length - 2; i++) {
+             int start = i + 1;
+             int end = arr.length - 1;
+             while(start < end) {
+                 int sum = arr[i] + arr[start] + arr[end];
+                 if(sum < targetSum) {
+                     tripletCount += end - start;
+                     start++;
+                 } else {
+                     end--;
+                 }
+             }
+         }
+         System.out.println(tripletCount);;
+
+    }
+    
+6. /**Merge two sorted arrays*/
+    public static void main(String[] args) {
+       int arr1[] = { 1, 3, 4, 5};
+       int arr2[] = {2, 4, 6, 8};
+       int arr3[] = new int[arr1.length+ arr2.length];
+       int i=0,j=0,k=0;
+       while (i< arr1.length && j< arr2.length ){
+           if (arr1[i]<arr2[j])
+               arr3[k++]=arr1[i++];
+           else arr3[k++]=arr2[j++];
+       }
+       while (i<arr1.length)
+           arr3[k++]=arr1[i++];
+       while (j<arr2.length)
+           arr3[k++]=arr2[j++];
+       for (i=0;i< arr3.length;i++)
+        System.out.print(arr3[i]+" ");
+    }
+
+7. /**Merge two sorted array with o(1) extra space.*/
+    public static void main(String[] args) {
+         int arr1[] = new int[] { 1, 5, 9, 10, 15, 20 };
+         int arr2[] = new int[] { 2, 3, 8, 13 };
+        int  n = arr1.length;
+        int m = arr2.length;
+        int i = 0, j = 0, k = n - 1;
+        while (i <= k && j < m) {
+            if (arr1[i] < arr2[j])
+                i++;
+            else {
+                int temp = arr2[j];
+                arr2[j] = arr1[k];
+                arr1[k] = temp;
+                j++;
+                k--;
+            }
+        }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        for (i=0;i< arr1.length;i++)
+            System.out.print(arr1[i]+" ");
+        for (i=0;i< arr2.length;i++)
+            System.out.print(arr2[i]+" ");
+    }
+
+8 .package com.company.sorting;
+   import java.util.Arrays;
+
+public class SortZero {
+    /**Sort arrays of 0s ,1s n 2s in order of one*/
+    public static void main(String[] args) {
+       int arr[] =  {1, 0, 2, 2, 0, 2, 1, 2, 1, 1, 2, 0};
+        System.out.println("Array Before Sorting : "+ Arrays.toString(arr));
+        int low = 0;
+        int mid = 0;
+        int high = arr.length-1;
+        while (mid <= high)
+        {
+            if (arr[mid] == 0)
+            {
+//               int temp = arr[low];
+//               arr[low] = arr[mid];
+//               arr[mid] = temp;
+                 swap(arr, low, mid);
+                low++;
+                mid++;
+            }
+            if (arr[mid]==1)
+                mid++;
+             if (arr[mid] == 2) {
+//                int temp = arr[mid];
+//                arr[mid] = arr[high];
+//                arr[high] = temp;
+                 swap(arr, mid, high);
+                high--;
+            }
+        }
+        System.out.println("Array After Sorting : "+Arrays.toString(arr));
+    }
+
+    private static void swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+}
+    
+9 . /**Length of largest sub array with sum 0*/
+    public static void main(String[] args) {
+        int arr[] = {2,8,-3,-5,2,-4,6,1,2,1,-3,4};
+        HashMap<Integer,Integer> map = new HashMap<>();
+        int mLen = 0;
+        int  i = -1;
+        int sum = 0;
+        map.put(sum,i);
+        while (i< arr.length-1){
+            i++;
+            sum += arr[i];
+            if (map.containsKey(sum)==false){
+                map.put(sum,i);
+            }else {
+                int len = i - map.get(sum);
+                if (len>mLen)
+                    mLen = len;
+            }
+        }
+        System.out.println("The max length is: "+mLen);
+    }
+    
+ 10. /**Product of Array Except Self*/
+    public static void main(String[] args) {
+        int arr[] = {1,2,3,4};
+        int n = arr.length;
+        int output[] = new int[n];
+        output[0] = 1;
+        for(int i=1;i<n;i++){
+            output[i] = arr[i-1] * output[i-1];
+        }
+        System.out.println(Arrays.toString(output));
+        int prod = 1;
+        for(int i=n-1;i>=0;i--){
+            output[i] = output[i] * prod;
+            prod = prod * arr[i];
+        }
+        System.out.println(Arrays.toString(output));
+    }
+    
+ 10 . /**Product of Array Except Self*/
+        public static void main(String[] args) {
+        ProdArray pa = new ProdArray();
+        int arr[] = { 10, 3, 5, 6, 2 };
+        int n = arr.length;
+        System.out.println("The product array is : ");
+        pa.productArray(arr, n);
+    }
+
+    void productArray(int arr[], int n)
+    {
+        if (n == 1) {
+            System.out.print(0);
+            return;
+        }
+        // Initialize memory to all arrays
+        int left[] = new int[n];
+        int right[] = new int[n];
+        int prod[] = new int[n];
+
+        int i, j;
+        left[0] = 1;
+        right[n - 1] = 1;
+
+        for (i = 1; i < n; i++)
+            left[i] = arr[i - 1] * left[i - 1];
+
+        for (j = n - 2; j >= 0; j--)
+            right[j] = arr[j + 1] * right[j + 1];
+
+        for (i = 0; i < n; i++)
+            prod[i] = left[i] * right[i];
+
+        System.out.println(Arrays.toString(prod));
+        return;
+    }              
+    
+                
+11. /**You are given an array. Each element represents the price of a stock on that particular day.
+     *  Calculate and return the maximum profit you can make from buying and selling that stock only once.*/
+       public static void main(String[] args) {
+        int arr[] = { 9, 11, 8, 5, 7, 10 };
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+
+        for (int i=0;i<arr.length;i++){
+                minPrice = Math.min(minPrice,arr[i]);
+              int currentProfit = arr[i]-minPrice;
+                 maxProfit = Math.max(maxProfit,currentProfit);
+        }
+        System.out.printf("The max profit is: "+maxProfit);
+    }        
+        
