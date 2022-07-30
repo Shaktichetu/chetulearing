@@ -3418,3 +3418,45 @@ public class MaxProfit {
         System.out.println(second);
     }
 
+20. Given a list of sorted numbers (can be both negative or positive), return the list of numbers squared in sorted order.Solve this in O(n) time.
+
+  public class SortedSquare {
+    public static void main(String[] args) {
+     int arr[]= new int[]{-7,-3,2,3,11} ;
+       // sortedSquares(arr);
+        int answer[]=   sortedSquaresMethod(arr);
+        System.out.print(Arrays.toString(answer));
+    }
+
+    public static int[] sortedSquares(int[] A) {
+        // Method one : complexity n(logn)
+         for (int i = 0; i < A.length; i++) {
+            A[i] = A[i] * A[i];
+        }
+        Arrays.sort(A);
+        return A;
+
+    }
+    public static int[] sortedSquaresMethod(int[] A) {
+        //method 2: complexity o(n)
+        int i = 0;
+        int j = A.length - 1;
+
+        int[] result = new int[A.length];
+
+        int count = A.length - 1;
+        while(count >= 0) {
+            if(Math.abs(A[i]) > Math.abs(A[j])) {
+                result[count] = A[i]*A[i];
+                i++;
+            }
+            else {
+                result[count] = A[j]*A[j];
+                j--;
+            }
+            count--;
+        }
+      //  System.out.println(Arrays.toString(result));
+        return result;
+    }
+}
