@@ -13,7 +13,18 @@ step 1:- echo $SHELL
 step 2:- update path
          chsh -s /bin/zsh
          touch .zshrc
-step 3:- $HOME/.zshrc		
+step 3:- $HOME/.zshrc	
+
+
+1. Sending array list in API dart
+
+ List<Map<String, String>> friendGroup = [];
+ for (var item in personID) {
+ friendGroup.add({'friendId': item});
+ }
+ print(friendGroup);
+
+	
 1. Stream Demo
 
 Stream<int> dataStream() async*{
