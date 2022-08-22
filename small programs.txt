@@ -11,7 +11,8 @@ https://www.youtube.com/watch?v=2SGvlFpIiTU // add internet permission Getx
 
 shortcut for vscode
 https://codewithandrea.com/articles/vscode-shortcuts-extensions-settings-flutter-development/?utm_source=Newsletter&utm_medium=email&utm_campaign=vscode-shortcuts-extensions-settings-flutter-development
-
+flutter Animation
+https://medium.com/google-developer-experts/animations-in-flutter-9761c23eb0f1
 
 
 Set flutter sdk path
