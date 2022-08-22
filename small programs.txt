@@ -9,6 +9,11 @@ https://github.com/KnowledgeCenterYoutube/LeetCode
 https://www.youtube.com/watch?v=2SGvlFpIiTU // add internet permission Getx 
 
 
+shortcut for vscode
+https://codewithandrea.com/articles/vscode-shortcuts-extensions-settings-flutter-development/?utm_source=Newsletter&utm_medium=email&utm_campaign=vscode-shortcuts-extensions-settings-flutter-development
+
+
+
 Set flutter sdk path
 step 1:- echo $SHELL
 step 2:- update path
