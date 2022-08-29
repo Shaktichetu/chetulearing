@@ -14,6 +14,12 @@ https://codewithandrea.com/articles/vscode-shortcuts-extensions-settings-flutter
 flutter Animation
 https://medium.com/google-developer-experts/animations-in-flutter-9761c23eb0f1
 
+API using Dio
+https://blog.logrocket.com/networking-flutter-using-dio/
+https://medium.com/dreamwod-tech/flutter-dio-framework-best-practices-668985fc75b7
+https://towardsdev.com/dio-package-in-flutter-http-requests-and-interceptors-2c3d6ef3e9a3
+https://codingwithdhrumil.com/2021/02/dio-flutter-rest-api-example.html
+
 
 Set flutter sdk path
 step 1:- echo $SHELL
