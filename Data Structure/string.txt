@@ -1089,3 +1089,84 @@ final 450-
                   System.out.print(str_ch[i]+" ");
         }
     }
+
+14. Given a string, determine if you can remove any character to create a palindrome.
+
+   public class RemovePallindrome {
+    public static void main(String[] args) {
+
+        String str = "abcdcbea";
+        boolean possible = (validPalindrome(str));
+        if (possible)
+            System.out.println(true);
+        else System.out.println(false);
+    }
+
+    public static boolean validPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left <= right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return isPalindrome(s, left + 1, right)
+                        || isPalindrome(s, left, right - 1);
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    private static boolean isPalindrome(String s, int start, int end) {
+        while (start <= end) {
+            if (s.charAt(start) != s.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
+
+
+15. Program for decimal to hexadecimal conversion
+
+public class ConvertHexa {
+    public static void main(String[] args) {
+        int n = 2545;
+        decToHexa(n);
+    }
+
+    static void decToHexa(int n)
+    {
+        // char array to store hexadecimal number
+        char[] hexaDeciNum = new char[100];
+
+        // counter for hexadecimal number array
+        int i = 0;
+        while (n != 0) {
+            // temporary variable to store remainder
+            int temp = 0;
+
+            // storing remainder in temp variable.
+            temp = n % 16;
+
+            // check if temp < 10
+            if (temp < 10) {
+                hexaDeciNum[i] = (char)(temp + 48);
+                i++;
+            }
+            else {
+                hexaDeciNum[i] = (char)(temp + 55);
+                i++;
+            }
+            n = n / 16;
+        }
+        // printing hexadecimal number array in reverse
+        // order
+        for (int j = i - 1; j >= 0; j--)
+            System.out.print(hexaDeciNum[j]);
+    }
+}
+
+
