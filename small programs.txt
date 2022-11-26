@@ -7,6 +7,7 @@ https://www.youtube.com/watch?v=YVaFoCiQ2SI // set flutter sdk path on MAC
 https://www.youtube.com/watch?v=QmVY5Vmtr4k  // API using Getx Flutter
 https://github.com/KnowledgeCenterYoutube/LeetCode
 https://www.youtube.com/watch?v=2SGvlFpIiTU // add internet permission Getx 
+https://www.freecodespot.com/blog/crud-in-flutter-using-firebase/
 
 
 shortcut for vscode
