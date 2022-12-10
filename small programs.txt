@@ -9,6 +9,9 @@ https://github.com/KnowledgeCenterYoutube/LeetCode
 https://www.youtube.com/watch?v=2SGvlFpIiTU // add internet permission Getx 
 https://www.freecodespot.com/blog/crud-in-flutter-using-firebase/
 https://github.com/geekyshow1/flutter_fb_auth_emailpass (email auth firebase flutter)
+https://blog.logrocket.com/securing-local-storage-flutter/ (secure storage)
+https://github.com/himanshusharma89/secure-storage (secure storage)
+
 
 shortcut for vscode
 https://codewithandrea.com/articles/vscode-shortcuts-extensions-settings-flutter-development/?utm_source=Newsletter&utm_medium=email&utm_campaign=vscode-shortcuts-extensions-settings-flutter-development
