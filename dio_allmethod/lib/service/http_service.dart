@@ -2,9 +2,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import '/constants/app_constants.dart';
 
+const BASE_URL = "https://eduar
 enum Method { POST, GET, PUT, DELETE, PATCH }
-
-const BASE_URL = "https://eduarno1.herokuapp.com/";
 
 class HttpService {
   Dio? _dio;

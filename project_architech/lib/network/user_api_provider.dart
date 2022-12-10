@@ -56,7 +56,7 @@ class UserApiProvider {
   }
 
   // Dio without header
-  final Dio _dioWithOutHeader = Dio()
+  final Dio dioWithOutHeader = Dio()
     ..options.baseUrl = Endpoints.baseUrl
     ..options.connectTimeout = Endpoints.connectionTimeout
     ..options.receiveTimeout = Endpoints.receiveTimeout
@@ -319,7 +319,6 @@ class UserApiProvider {
       print("Exception occured: $error stackTrace: $stacktrace");
       String msg = DioErrorUtil.handleError(error as DioError);
       if (error.response!.statusCode == 401 || error.response!.statusCode == 500) {
-
 
         Utility.showLoaderForError(Strings.session_expire);
 
