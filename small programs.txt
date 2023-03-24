@@ -58,6 +58,24 @@ void main(List<String> args) async {
  });
 }
 
+3. search logic in texfield
+   	 List<Data> yourListFiltered = [];
+
+  void filterUserList(String value) {
+    yourListFiltered.clear();
+    if (value.isEmpty) {
+      yourListFiltered .addAll(listFromApi);
+    } else {
+      for (var item in listFromApi) {
+        if (item.userName!.toLowerCase().contains(value.toLowerCase()) ||
+            item.mobileNumber!.toLowerCase().contains(value.toLowerCase())) {
+          yourListFiltered.add(item);
+        }
+      }
+    }
+    update();
+  }	 
+
 2. Silvers in flutter 
 //https://www.geeksforgeeks.org/flutter-silverappbar-widget/
 import 'package:flutter/material.dart';
