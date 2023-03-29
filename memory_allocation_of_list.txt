@@ -1,0 +1,32 @@
+void main() {
+
+  //List<String> primaryList = [];
+  
+  List<List<String>> mainList = [];
+  
+  List mappedKys = ["name","salary","age"];
+  
+  List demoList = [
+    {"name": "shakti","salary": "4500","age":"25"},
+    {"name": "daany","salary": "2500","age":"50" },
+     {"name": "anusha","salary": "4500","age":"25"}
+                  
+  ];
+  
+  mainList.clear();
+    for (int i = 0; i < demoList.length; i++) {
+       List<String> primaryList = [];
+      //primaryList.clear(); 
+      
+      print(primaryList.hashCode.toString());
+      
+       for (var item in mappedKys) {
+       primaryList.add(demoList[i][item].toString());
+      }
+
+     mainList.add(primaryList);
+   }
+  
+  
+  print(mainList.toString());
+}
