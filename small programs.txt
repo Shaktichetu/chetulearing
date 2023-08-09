@@ -19,6 +19,7 @@ flutter Animation
 https://medium.com/google-developer-experts/animations-in-flutter-9761c23eb0f1
 
 API using Dio
+https://dhruvnakum.xyz/networking-in-flutter-dio
 https://blog.logrocket.com/networking-flutter-using-dio/
 https://medium.com/dreamwod-tech/flutter-dio-framework-best-practices-668985fc75b7
 https://towardsdev.com/dio-package-in-flutter-http-requests-and-interceptors-2c3d6ef3e9a3
