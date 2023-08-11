@@ -1,0 +1,149 @@
+class TechnicianListController extends GetxController {
+  TextEditingController searchController = TextEditingController();
+
+  List<Data> techniciansListFiltered = [];
+  List<Data> techniciansList = [];
+
+  void onClearPressed() {
+    searchController.clear();
+    techniciansListFiltered.clear();
+    techniciansListFiltered.addAll(techniciansList);
+    update();
+  }
+
+  @override
+  void onInit() {
+    fetchTechnicians();
+    super.onInit();
+  }
+
+  void filterUserList(String value) {
+    techniciansListFiltered.clear();
+    if (value.isEmpty) {
+      techniciansListFiltered.addAll(techniciansList);
+    } else {
+      for (var item in techniciansList) {
+        if (item.userName!.toLowerCase().contains(value.toLowerCase()) ||
+            ((item.mobileNumber != null) &&
+                (item.mobileNumber!.contains(value.toLowerCase())))) {
+          techniciansListFiltered.add(item);
+        }
+      }
+    }
+    update();
+  }
+
+  Future<void> fetchTechnicians() async {
+    Map<String, dynamic> data = {"username": "antimas@yopmail.com"};
+    await TechniciansListRepository()
+        .getTechniciansApi(data)
+        .then((techniciansModel) {
+      if (techniciansModel.statusCode == 200) {
+        Get.closeAllSnackbars();
+        techniciansList = techniciansModel.data!;
+        techniciansListFiltered.addAll(techniciansList);
+      } else {}
+    });
+    update();
+  }
+}
+
+
+class TechnicianListScreen extends StatefulWidget {
+  const TechnicianListScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TechnicianListScreen> createState() => _TechnicianListScreenState();
+}
+
+class _TechnicianListScreenState extends State<TechnicianListScreen> {
+  TechnicianListController technicianListController =
+      Get.find<TechnicianListController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            shadowColor: Colors.white,
+            iconTheme: const IconThemeData(
+              color: Colors.lightBlue, //change your color here
+            ),
+            backgroundColor: Colors.white,
+            title: const Text(StringConstants.technicians,
+                style: TextStyle(color: Colors.black))),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Card(
+                elevation: 2,
+                child: ListTile(
+                  leading: const Icon(Icons.search, color: appColor),
+                  title: TextField(
+                    controller: technicianListController.searchController,
+                    decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                        hintText: StringConstants.searchTechnician,
+                        border: InputBorder.none),
+                    onChanged: (value) {
+                      technicianListController.filterUserList(value);
+                    },
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.cancel,
+                      color: appColor,
+                    ),
+                    onPressed: () {
+                      technicianListController.onClearPressed();
+                    },
+                  ),
+                ),
+              ),
+              GetBuilder<TechnicianListController>(
+                  init: technicianListController,
+                  builder: (context) {
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: technicianListController
+                              .techniciansListFiltered.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              tileColor: Colors.white,
+                              leading: const CircleAvatar(
+                                backgroundImage:
+                                    AssetImage('images/dummy_photo.png'),
+                                backgroundColor: Colors.blue,
+                              ),
+                              title: Text(
+                                technicianListController
+                                    .techniciansListFiltered[index].userName
+                                    .toString(),
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(technicianListController
+                                      .techniciansListFiltered[index]
+                                      .mobileNumber ??
+                                  ""),
+                              shape: RoundedRectangleBorder(
+                                side: const BorderSide(
+                                    color: Colors.black12, width: 5),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              onTap: () {
+                                Get.back(
+                                    result: technicianListController
+                                        .techniciansListFiltered[index]);
+                              },
+                            );
+                          }),
+                    );
+                  }),
+            ],
+          ),
+          //  Get.toNamed(RouterNames.technicianListScreen);
+        ));
+  }
+}
