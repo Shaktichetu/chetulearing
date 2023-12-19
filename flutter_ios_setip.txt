@@ -1,0 +1,8 @@
+Go To Finder 
+Win + Shift + G => To Get Path
+Win + shift + . => To see hidden files
+
+to view .zshrc file 
+/Users/Chetu/.zshrc
+
+Inside .zshrc file, we set flutter SDK path
